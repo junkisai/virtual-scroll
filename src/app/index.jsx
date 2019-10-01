@@ -3,18 +3,27 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
-import styled from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 
 import configureStore, { history } from '../configureStore'; 
 import TopContainer from '../pages/TopContainer';
 
 const store = configureStore();
 
-const App = styled.div`
+const GlobalStyle = createGlobalStyle`
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
 `;
 
 ReactDOM.render(
-  <App>
+  <React.Fragment>
     <Provider store={store}>
       <ConnectedRouter history={history}>
         <Switch>
@@ -22,6 +31,7 @@ ReactDOM.render(
         </Switch>
       </ConnectedRouter>
     </Provider>
-  </App>,
+    <GlobalStyle />
+  </React.Fragment>,
   document.getElementById('app'),
 );

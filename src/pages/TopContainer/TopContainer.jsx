@@ -1,9 +1,6 @@
-import PropTypes from 'prop-types';
 import React from 'react';
-import styled from 'styled-components';
 
-const Hoge = styled.div`
-`;
+import VirtualList from '../../components/VirtualList';
 
 class TopContainer extends React.Component {
   constructor(props) {
@@ -11,21 +8,23 @@ class TopContainer extends React.Component {
   }
 
   render() {
+    const list = [...Array(500).keys()].map(i => i + 1700);
+
     return(
-      <Hoge>
-        <h3>{this.props.hoge}</h3>
-        <button onClick={this.props.pushClicked}>hogeページへ移動</button>
-      </Hoge>
+      <VirtualList
+        list={list}
+        viewNum={5}
+        itemNum={list.length}
+        itemHeight={30}
+      />
     );
   }
 }
 
 TopContainer.propTypes = {
-  hoge: PropTypes.string,
 };
 
 TopContainer.defaultProps = {
-  hoge: 'hello world',
 };
 
 export default TopContainer;

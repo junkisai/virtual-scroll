@@ -5,6 +5,7 @@ import styled from 'styled-components';
 const MARGIN_ITEM_COUNT = 3;
 
 const Outer = styled.div`
+  width: 150px;
   height: ${props => props.height}px;
   background-color: rgba(0, 0, 255, 0.2);
   overflow-y: scroll;
@@ -15,7 +16,7 @@ const Inner = styled.div`
   background-color: rgba(255, 0, 0, 0.2);
 `;
 
-const List = styled.ul.attrs(props => ({
+const Items = styled.ul.attrs(props => ({
   style: {
     top: `${props.top}px`
   },
@@ -27,7 +28,10 @@ const List = styled.ul.attrs(props => ({
 const Item = styled.li`
   display: flex;
   height: ${props => props.height}px;
+  justify-content: center;
   align-items: center;
+  user-select: none;
+  cursor: pointer;
 `;
 
 const VirtualList = props => {
@@ -57,11 +61,11 @@ const VirtualList = props => {
       onScroll={handleScroll}
     >
       <Inner height={props.itemHeight * props.itemNum}>
-        <List top={startIndex * props.itemHeight}>
+        <Items top={startIndex * props.itemHeight}>
           {filterItems(props.list).map((item, index) =>
             <Item key={index} height={props.itemHeight}>{item}</Item>
           )}
-        </List>
+        </Items>
       </Inner>
     </Outer>
   );
